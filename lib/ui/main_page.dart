@@ -159,23 +159,25 @@ class MainPage extends StatelessWidget {
       margin: EdgeInsets.only(
           left: _sidePadding, right: _sidePadding, top: _topPadding),
       color: Colors.transparent,
-      child: Column(
-        children: <Widget>[
-          //검색 바
-          _searchBar(_size),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            //검색 바
+            _searchBar(_size),
 
-          //영화 Top10
-          _showMoviesList(_size),
+            //영화 Top10
+            _showMoviesList(_size),
 
-          SizedBox(height: _size.height * 0.01,),
+            SizedBox(height: _size.height * 0.01,),
 
-          //탭바
-          _tabBar(_size),
+            //탭바
+            _tabBar(_size),
 
-          //영화 목록
-          MovieViewWidget(),
+            //영화 목록
+            MovieViewWidget(),
 
-        ],
+          ],
+        ),
       ),
     );
   }
