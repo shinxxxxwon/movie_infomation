@@ -13,7 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    movieBloc.fetchAllMovies();
+    movieBloc.popularFetchAllMovies();
+    movieBloc.nowplayingFetchAllMovies();
+    movieBloc.upCommingFetchAllMovies();
 
     return Platform.isAndroid
         ? MaterialApp(

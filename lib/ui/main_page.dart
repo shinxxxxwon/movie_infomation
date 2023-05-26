@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_infomation/blocs/movie_bloc.dart';
 import 'package:movie_infomation/models/item_model.dart';
+import 'package:movie_infomation/widget/movie_view_widget.dart';
 import 'package:movie_infomation/widget/tab_button_widget.dart';
 
 class MainPage extends StatelessWidget {
@@ -59,11 +60,12 @@ class MainPage extends StatelessWidget {
       width: size.width,
       height: size.height * 0.3,
       child: StreamBuilder(
-        stream: movieBloc.allMovies,
+        stream: movieBloc.popularAllMovies,
         builder: (context, AsyncSnapshot<ItemModel> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              itemCount: snapshot.data?.results.length,
+              // itemCount: snapshot.data?.results.length,
+              itemCount: 10,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Stack(
@@ -73,7 +75,7 @@ class MainPage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16.0),
                         child: Image.network(
-                          'https://image.tmdb.org/t/p/w185${snapshot.data?.results[index].poster_path}',
+                          'https://image.tmdb.org/t/p/original${snapshot.data?.results[index].poster_path}',
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -169,6 +171,9 @@ class MainPage extends StatelessWidget {
 
           //탭바
           _tabBar(_size),
+
+          //영화 목록
+          MovieViewWidget(),
 
         ],
       ),

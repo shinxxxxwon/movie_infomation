@@ -5,5 +5,7 @@ import 'package:movie_infomation/resource/movie_api_provider.dart';
 class Repository{
   final MovieApiProver movieApiProver = MovieApiProver();
 
-  Future<ItemModel> fetchAllMovies() => movieApiProver.fetchMovieList();
+  Future<ItemModel> popularFetchAllMovies() => movieApiProver.popularFetchMovieList();
+  Future<ItemModel> nowPlayingFetchAllMovies() => movieApiProver.nowplayingFetchMovieList();
+  Future<ItemModel> upcommingFetchAllMovies() => movieApiProver.upcommingFetchMovieList();
 }
