@@ -8,15 +8,25 @@ void main(){
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
     movieBloc.popularFetchAllMovies();
     movieBloc.nowplayingFetchAllMovies();
     movieBloc.upCommingFetchAllMovies();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Platform.isAndroid
         ? MaterialApp(
       themeMode: ThemeMode.dark,
@@ -34,6 +44,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 
 

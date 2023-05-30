@@ -34,7 +34,7 @@ class MovieApiProver{
   Future<ItemModel> upcommingFetchMovieList() async {
     Dio dio = Dio();
 
-    final response = await dio.get("http://api.themoviedb.org/3/movie/upcomming?api_key=$_apiKey");
+    final response = await dio.get("http://api.themoviedb.org/3/movie/upcoming?api_key=$_apiKey");
     // print("response : ${response.data.toString()}");
     if (response.statusCode == 200) {
       return ItemModel.fromJson(response.data);

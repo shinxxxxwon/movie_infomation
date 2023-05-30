@@ -7,9 +7,9 @@ import 'package:rxdart/rxdart.dart';
 
 class MovieBloc{
   final Repository _repository = Repository();
-  final _popularMoviesFetcher = StreamController<ItemModel>();
-  final _nowplayingMoviesFetcher = StreamController<ItemModel>();
-  final _upcommingMoviesFetcher = StreamController<ItemModel>();
+  final _popularMoviesFetcher = StreamController<ItemModel>.broadcast();
+  final _nowplayingMoviesFetcher = StreamController<ItemModel>.broadcast();
+  final _upcommingMoviesFetcher = StreamController<ItemModel>.broadcast();
 
   Stream<ItemModel> get popularAllMovies => _popularMoviesFetcher.stream;
   Stream<ItemModel> get nowplayingAllMovies => _nowplayingMoviesFetcher.stream;

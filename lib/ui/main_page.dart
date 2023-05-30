@@ -149,7 +149,6 @@ class MainPage extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    // movieBloc.fetchAllMovies();
 
     Size _size = MediaQuery.of(context).size;
     double _sidePadding = _size.width * 0.05;
@@ -175,7 +174,6 @@ class MainPage extends StatelessWidget {
 
             //영화 목록
             MovieViewWidget(),
-
           ],
         ),
       ),
