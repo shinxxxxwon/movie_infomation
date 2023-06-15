@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_infomation/blocs/movie_bloc.dart';
 import 'package:movie_infomation/models/item_model.dart';
+import 'package:movie_infomation/ui/detail_page.dart';
+import 'package:movie_infomation/ui/search_movie_page.dart';
 import 'package:movie_infomation/widget/movie_view_widget.dart';
 import 'package:movie_infomation/widget/tab_button_widget.dart';
 
@@ -12,7 +14,7 @@ class MainPage extends StatelessWidget {
 
   final TextEditingController _searchController = TextEditingController();
 
-  Widget _searchBar(Size size) {
+  Widget _searchBar(BuildContext context, Size size) {
     final _textSize = size.width * 0.04;
 
     return Platform.isAndroid
@@ -30,7 +32,9 @@ class MainPage extends StatelessWidget {
               ),
               suffixIcon: IconButton(
                 icon: const Icon(Icons.search, color: Color(0xFF67686D)),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchMoviePage(searchText: _searchController.text)));
+                },
               ),
               fillColor: const Color(0xFF3A3F47),
             ),
@@ -48,7 +52,9 @@ class MainPage extends StatelessWidget {
             ),
             suffix: CupertinoButton(
               child: const Icon(Icons.search, color: Color(0xFF67686D)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, CupertinoPageRoute(builder: (context) => SearchMoviePage(searchText: _searchController.text)));
+              },
             ),
           );
   }
@@ -72,11 +78,18 @@ class MainPage extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(_padding),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16.0),
-                        child: Image.network(
-                          'https://image.tmdb.org/t/p/original${snapshot.data?.results[index].poster_path}',
-                          fit: BoxFit.fill,
+                      child: GestureDetector(
+                        onTap: (){
+                          Platform.isAndroid
+                              ? Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(index: index, snapshot: snapshot)))
+                              : Navigator.push(context, CupertinoPageRoute(builder: (context) => DetailPage(index: index, snapshot: snapshot)));
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16.0),
+                          child: Image.network(
+                            'https://image.tmdb.org/t/p/original${snapshot.data!.results[index].poster_path}',
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
@@ -162,7 +175,7 @@ class MainPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             //검색 바
-            _searchBar(_size),
+            _searchBar(context, _size),
 
             //영화 Top10
             _showMoviesList(_size),

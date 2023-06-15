@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_infomation/blocs/movie_bloc.dart';
 import 'package:movie_infomation/blocs/tab_button_bloc.dart';
 import 'package:movie_infomation/models/item_model.dart';
+import 'package:movie_infomation/ui/detail_page.dart';
 
 class MovieViewWidget extends StatefulWidget {
 
@@ -26,20 +28,14 @@ class _MovieViewWidgetState extends State<MovieViewWidget> {
   void initState() {
     // TODO: implement initState
     tabButtonBloc.stateStream.listen((state) {
+      movieBloc.popularFetchAllMovies();
+      movieBloc.nowplayingFetchAllMovies();
+      movieBloc.upCommingFetchAllMovies();
+
       setState(() {
         selectedIndex = state.selectedIndex;
         index++;
-
-        if(selectedIndex == 0){
-          _stream = movieBloc.nowplayingAllMovies;
-        }
-        else if(selectedIndex == 1){
-          _stream = movieBloc.upcommingAllMovies;
-        }
-        else{
-          _stream = movieBloc.popularAllMovies;
-        }
-
+        _getStream();
       });
     });
     super.initState();
@@ -66,10 +62,6 @@ class _MovieViewWidgetState extends State<MovieViewWidget> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    _getStream();
-
-    print('selectedIndex: $selectedIndex');
-    print('_stream: $_stream');
 
     return StreamBuilder(
       stream: _stream,
@@ -81,19 +73,26 @@ class _MovieViewWidgetState extends State<MovieViewWidget> {
           return GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: snapshot.data?.results.length,
+            itemCount: snapshot.data!.results.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               childAspectRatio: _size.width / _size.height,
             ),
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                padding: EdgeInsets.all(_size.width * 0.01),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: Image.network(
-                    'https://image.tmdb.org/t/p/w185${snapshot.data?.results[index].poster_path}',
-                    fit: BoxFit.fill,
+              return GestureDetector(
+                onTap: (){
+                  Platform.isAndroid
+                      ? Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(snapshot: snapshot, index: index)))
+                      : Navigator.push(context, CupertinoPageRoute(builder: (context) => DetailPage(snapshot: snapshot, index: index)));
+                },
+                child: Container(
+                  padding: EdgeInsets.all(_size.width * 0.01),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16.0),
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/w185${snapshot.data!.results[index].poster_path}',
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               );

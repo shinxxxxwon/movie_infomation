@@ -8,4 +8,5 @@ class Repository{
   Future<ItemModel> popularFetchAllMovies() => movieApiProver.popularFetchMovieList();
   Future<ItemModel> nowPlayingFetchAllMovies() => movieApiProver.nowplayingFetchMovieList();
   Future<ItemModel> upcommingFetchAllMovies() => movieApiProver.upcommingFetchMovieList();
+  Future<ItemModel> searchFetchAllMovies(String text) => movieApiProver.searchFetchMovieList(text);
 }

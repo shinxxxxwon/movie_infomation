@@ -22,6 +22,7 @@ class _TabButtonWidgetState extends State<TabButtonWidget> {
         selectedIndex = state.selectedIndex;
       });
     });
+
     super.initState();
   }
 
