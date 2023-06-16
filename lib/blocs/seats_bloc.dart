@@ -1,4 +1,6 @@
 
+import 'package:movie_infomation/blocs/movie_bloc.dart';
+
 class SeatsBloc{
 
   List<List<int>> seats = [
@@ -14,10 +16,14 @@ class SeatsBloc{
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
 
-  void init(){
+
+  Map<int, List<List<int>>> movieSeats = {};
+
+
+  void seatsInit(int movieId){
     for(int i=0; i<seats.length; i++){
       for(int j=0; j<seats[i].length; j++){
-        if(seats[i][j] !=  2){
+        if(movieSeats[movieId]![i][j] !=  2){
           seats[i][j] = 0;
         }
       }

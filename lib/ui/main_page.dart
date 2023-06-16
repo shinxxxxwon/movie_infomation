@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_infomation/blocs/movie_bloc.dart';
+import 'package:movie_infomation/blocs/seats_bloc.dart';
 import 'package:movie_infomation/models/item_model.dart';
 import 'package:movie_infomation/ui/detail_page.dart';
 import 'package:movie_infomation/ui/search_movie_page.dart';
@@ -74,6 +75,9 @@ class MainPage extends StatelessWidget {
               itemCount: 10,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
+                if(!seatsBloc.movieSeats.containsKey(snapshot.data!.results[index].id)){
+                  seatsBloc.movieSeats[snapshot.data!.results[index].id] = seatsBloc.seats.toList();
+                }
                 return Stack(
                   children: <Widget>[
                     Padding(
@@ -150,10 +154,6 @@ class MainPage extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: TabButtonWidget(index: 1, title: "개봉 예정"),
-          ),
-          Expanded(
-            flex: 1,
             child: TabButtonWidget(index: 2, title: "인기 영화"),
           ),
         ],
@@ -162,6 +162,10 @@ class MainPage extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+
+    movieBloc.popularFetchAllMovies();
+    movieBloc.nowplayingFetchAllMovies();
+    movieBloc.upCommingFetchAllMovies();
 
     Size _size = MediaQuery.of(context).size;
     double _sidePadding = _size.width * 0.05;

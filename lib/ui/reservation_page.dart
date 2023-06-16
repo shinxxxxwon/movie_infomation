@@ -301,8 +301,8 @@ class _ReservationPageState extends State<ReservationPage> {
                     }
 
                     Platform.isAndroid
-                        ? Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationInfoPage(index: widget.index!, snapshot: widget.snapshot!)))
-                        : Navigator.push(context, CupertinoPageRoute(builder: (context) => ReservationInfoPage(index: widget.index!, snapshot: widget.snapshot!)));
+                        ? Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationInfoPage(index: widget.index!, snapshot: widget.snapshot!, seatInfo: selectSeats,)))
+                        : Navigator.push(context, CupertinoPageRoute(builder: (context) => ReservationInfoPage(index: widget.index!, snapshot: widget.snapshot!, seatInfo: selectSeats,)));
                   },
                   child: Container(
                     width: size.width,
@@ -365,7 +365,7 @@ class _ReservationPageState extends State<ReservationPage> {
   @override
   void initState() {
     // TODO: implement initState
-    seatsBloc.init();
+    seatsBloc.seatsInit(widget.snapshot!.data!.results[widget.index!].id);
     super.initState();
   }
 

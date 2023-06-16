@@ -19,9 +19,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    movieBloc.popularFetchAllMovies();
-    movieBloc.nowplayingFetchAllMovies();
-    movieBloc.upCommingFetchAllMovies();
     super.initState();
   }
 

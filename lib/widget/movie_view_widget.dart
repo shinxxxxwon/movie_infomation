@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movie_infomation/blocs/movie_bloc.dart';
+import 'package:movie_infomation/blocs/seats_bloc.dart';
 import 'package:movie_infomation/blocs/tab_button_bloc.dart';
 import 'package:movie_infomation/models/item_model.dart';
 import 'package:movie_infomation/ui/detail_page.dart';
@@ -37,6 +38,8 @@ class _MovieViewWidgetState extends State<MovieViewWidget> {
         index++;
         _getStream();
       });
+
+
     });
     super.initState();
   }
@@ -79,6 +82,10 @@ class _MovieViewWidgetState extends State<MovieViewWidget> {
               childAspectRatio: _size.width / _size.height,
             ),
             itemBuilder: (BuildContext context, int index) {
+              if(!seatsBloc.movieSeats.containsKey(snapshot.data!.results[index].id)){
+                seatsBloc.movieSeats[snapshot.data!.results[index].id] = seatsBloc.seats.toList();
+              }
+
               return GestureDetector(
                 onTap: (){
                   Platform.isAndroid
