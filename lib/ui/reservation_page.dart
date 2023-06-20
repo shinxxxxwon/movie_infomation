@@ -122,8 +122,8 @@ class _ReservationPageState extends State<ReservationPage> {
           crossAxisCount: 10,
           childAspectRatio: 1/1,
         ),
-        // itemCount: seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!]]!.length ,
-        itemCount: 100,
+        itemCount: 80 ,
+        // itemCount: 100,
         itemBuilder: (BuildContext context, int index){
           int col = index ~/ 10;
           int row = index % 10;
