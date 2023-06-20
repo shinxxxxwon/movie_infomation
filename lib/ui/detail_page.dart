@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/widget/detail_widget.dart';
+import '../models/item_model.dart';
+import '../widget/detail_widget.dart';
 
 class DetailPage extends StatelessWidget {
   AsyncSnapshot<ItemModel>? snapshot;

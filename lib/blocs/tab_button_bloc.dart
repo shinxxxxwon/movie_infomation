@@ -1,6 +1,6 @@
 
 import 'dart:async';
-import 'package:movie_infomation/models/tab_button_model.dart';
+import '../models/tab_button_model.dart';
 
 
 class TabButtonBloc{

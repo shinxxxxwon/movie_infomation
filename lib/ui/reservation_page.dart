@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/blocs/seats_bloc.dart';
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/ui/reservation_info_page.dart';
+import '../blocs/seats_bloc.dart';
+import '../models/item_model.dart';
+import 'reservation_info_page.dart';
 
 class ReservationPage extends StatefulWidget {
   final AsyncSnapshot<ItemModel>? snapshot;
@@ -122,7 +122,8 @@ class _ReservationPageState extends State<ReservationPage> {
           crossAxisCount: 10,
           childAspectRatio: 1/1,
         ),
-        itemCount: seatsBloc.seats.length * seatsBloc.seats[0].length ,
+        // itemCount: seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!]]!.length ,
+        itemCount: 100,
         itemBuilder: (BuildContext context, int index){
           int col = index ~/ 10;
           int row = index % 10;
@@ -131,13 +132,13 @@ class _ReservationPageState extends State<ReservationPage> {
                 child: GestureDetector(
                   onTap: (){
                     setState(() {
-                      if(seatsBloc.seats[col][row] == 0){
-                        seatsBloc.seats[col][row] = 1;
+                      if(seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![col][row] == 0){
+                        seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![col][row] = 1;
                         selectSeats.add('${seatName[col]}$row');
                         price += 10000;
                       }
-                      else if(seatsBloc.seats[col][row] == 1){
-                        seatsBloc.seats[col][row] = 0;
+                      else if(seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![col][row] == 1){
+                        seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![col][row] = 0;
                         selectSeats.removeWhere((element) => element == '${seatName[col]}$row');
                         price -= 10000;
                       }
@@ -148,7 +149,8 @@ class _ReservationPageState extends State<ReservationPage> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: setSeatsColor(seatsBloc.seats[col][row]),
+                        color: setSeatsColor(seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![col][row]),
+                      // color: Colors.white,
                         borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
@@ -160,6 +162,7 @@ class _ReservationPageState extends State<ReservationPage> {
   }
 
   Color setSeatsColor(int selected){
+    // print('select : $selected');
     if(selected == 0){
       return Colors.white;
     }
@@ -292,10 +295,10 @@ class _ReservationPageState extends State<ReservationPage> {
                 flex: 1,
                 child: GestureDetector(
                   onTap: (){
-                    for(int i=0; i<seatsBloc.seats.length; i++){
-                      for(int j=0; j<seatsBloc.seats[i].length; j ++){
-                        if(seatsBloc.seats[i][j] == 1){
-                          seatsBloc.seats[i][j] = 2;
+                    for(int i=0; i<seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]!.length; i++){
+                      for(int j=0; j<seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![i].length; j ++){
+                        if(seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![i][j] == 1){
+                          seatsBloc.movieSeats[widget.snapshot!.data!.results[widget.index!].id]![i][j] = 2;
                         }
                       }
                     }

@@ -1,9 +1,8 @@
 
 import 'dart:async';
 
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/resource/repository.dart';
-import 'package:rxdart/rxdart.dart';
+import '../models/item_model.dart';
+import '../resource/repository.dart';
 
 class MovieBloc{
   final Repository _repository = Repository();

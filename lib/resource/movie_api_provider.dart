@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:movie_infomation/models/item_model.dart';
+import '../models/item_model.dart';
 
 class MovieApiProver{
   final _apiKey = "6bdd6f36cb39f19fc91894a86183a8bd";

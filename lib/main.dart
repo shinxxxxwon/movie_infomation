@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/blocs/movie_bloc.dart';
-import 'package:movie_infomation/ui/main_page.dart';
+import '/ui/main_page.dart';
 
 void main(){
   runApp(MyApp());

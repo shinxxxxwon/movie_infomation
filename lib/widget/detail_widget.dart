@@ -2,11 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/blocs/movie_bloc.dart';
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/resource/movie_api_provider.dart';
-import 'package:movie_infomation/ui/reservation_page.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import '../models/item_model.dart';
+import '../ui/reservation_page.dart';
+// import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DetailWidget extends StatefulWidget {
   final AsyncSnapshot<ItemModel>? snapshot;
@@ -20,7 +18,7 @@ class DetailWidget extends StatefulWidget {
 
 class _DetailWidgetState extends State<DetailWidget> {
   late String _trailerUrl;
-  late YoutubePlayerController _youtubeController;
+  // late YoutubePlayerController _youtubeController;
 
   Widget _titleView(Size size) {
     return Container(
@@ -120,22 +118,22 @@ class _DetailWidgetState extends State<DetailWidget> {
     );
   }
 
-  Widget _trailerView(Size size) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(size.width * 0.02),
-        decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(8.0),
-            ),
-        child: YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              width: size.width * 0.9,
-              controller: _youtubeController,
-            ),
-            builder: (context, player) => player),
-      ),
-    );
-  }
+  // Widget _trailerView(Size size) {
+  //   return SingleChildScrollView(
+  //     child: Container(
+  //       padding: EdgeInsets.all(size.width * 0.02),
+  //       decoration: BoxDecoration(
+  //           // borderRadius: BorderRadius.circular(8.0),
+  //           ),
+  //       child: YoutubePlayerBuilder(
+  //           player: YoutubePlayer(
+  //             width: size.width * 0.9,
+  //             controller: _youtubeController,
+  //           ),
+  //           builder: (context, player) => player),
+  //     ),
+  //   );
+  // }
 
   Widget _reservationButton(Size size) {
     return TextButton(
@@ -167,22 +165,22 @@ class _DetailWidgetState extends State<DetailWidget> {
   @override
   void initState() {
     _trailerUrl = 'https://www.youtube.com/watch?v=fZvdBUhHlAY';
-    _youtubeController = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(_trailerUrl)!,
-    );
+    // _youtubeController = YoutubePlayerController(
+    //   initialVideoId: YoutubePlayer.convertUrlToId(_trailerUrl)!,
+    // );
     super.initState();
   }
 
   @override
   void deactivate() {
     // TODO: implement deactivate
-    _youtubeController.pause();
+    // _youtubeController.pause();
     super.deactivate();
   }
 
   @override
   void dispose() {
-    _youtubeController.dispose();
+    // _youtubeController.dispose();
     super.dispose();
   }
 

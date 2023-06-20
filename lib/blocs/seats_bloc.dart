@@ -1,5 +1,5 @@
 
-import 'package:movie_infomation/blocs/movie_bloc.dart';
+// import '/blocs/movie_bloc.dart';
 
 class SeatsBloc{
 
@@ -21,23 +21,23 @@ class SeatsBloc{
 
 
   void seatsInit(int movieId){
-    for(int i=0; i<seats.length; i++){
-      for(int j=0; j<seats[i].length; j++){
+    for(int i=0; i<seatsBloc.movieSeats[movieId]!.length; i++){
+      for(int j=0; j<seatsBloc.movieSeats[movieId]![i].length; j++){
         if(movieSeats[movieId]![i][j] !=  2){
-          seats[i][j] = 0;
+          movieSeats[movieId]![i][j] = 0;
         }
       }
     }
   }
 
 
-  void updateSeats(List<int> select){
+  void updateSeats(List<int> select, int movieId){
     int col = 0, row = 0;
     for(int i=0; i<select.length; i++){
       col = select[i] ~/ 10;
       row = select[i] % 10;
 
-      seats[col][row] = 1;
+      seatsBloc.movieSeats[movieId]![col][row] = 1;
     }
   }
 

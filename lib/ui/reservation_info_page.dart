@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/ui/main_page.dart';
+import 'package:movie_infomation/main.dart';
+import '../models/item_model.dart';
+import 'main_page.dart';
 
 class ReservationInfoPage extends StatelessWidget {
   final AsyncSnapshot<ItemModel>? snapshot;
@@ -130,8 +131,8 @@ class ReservationInfoPage extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         Platform.isAndroid
-            ? Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()))
-            : Navigator.push(context, CupertinoPageRoute(builder: (context) => MainPage()));
+            ? Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()))
+            : Navigator.push(context, CupertinoPageRoute(builder: (context) => MyApp()));
       },
       child: Container(
         width: size.width,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/blocs/tab_button_bloc.dart';
+import '../blocs/tab_button_bloc.dart';
 
 class TabButtonWidget extends StatefulWidget {
   int? index;

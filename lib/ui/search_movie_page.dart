@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/blocs/movie_bloc.dart';
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/ui/detail_page.dart';
+import '../blocs/movie_bloc.dart';
+import '../models/item_model.dart';
+import 'detail_page.dart';
 
 class SearchMoviePage extends StatelessWidget {
   String? searchText;

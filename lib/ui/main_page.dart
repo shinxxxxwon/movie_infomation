@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_infomation/blocs/movie_bloc.dart';
-import 'package:movie_infomation/blocs/seats_bloc.dart';
-import 'package:movie_infomation/models/item_model.dart';
-import 'package:movie_infomation/ui/detail_page.dart';
-import 'package:movie_infomation/ui/search_movie_page.dart';
-import 'package:movie_infomation/widget/movie_view_widget.dart';
-import 'package:movie_infomation/widget/tab_button_widget.dart';
+import '../blocs/movie_bloc.dart';
+import '../blocs/seats_bloc.dart';
+import '../models/item_model.dart';
+import '../ui/detail_page.dart';
+import 'search_movie_page.dart';
+import '../widget/movie_view_widget.dart';
+import '../widget/tab_button_widget.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class MainPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 if(!seatsBloc.movieSeats.containsKey(snapshot.data!.results[index].id)){
-                  seatsBloc.movieSeats[snapshot.data!.results[index].id] = seatsBloc.seats.toList();
+                  seatsBloc.movieSeats[snapshot.data!.results[index].id] = List<List<int>>.from(seatsBloc.seats.map((row) => List<int>.from(row)));
                 }
                 return Stack(
                   children: <Widget>[
